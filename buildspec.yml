@@ -1,13 +1,10 @@
 version: 0.2
 
 phases:
-  pre_build:
-    commands:
-     - New-Item -ItemType Junction -Path C:\Src -Value $Env:CODEBUILD_SRC_DIR
-     - cd C:\codebuild\tmp\output\src756157907\src  
-     - nuget.exe restore
+  
   build:
     commands:
+     - nuget restore
      - msbuild .\WebApplicationSample\WebApplicationSample.csproj /t:Package /p:DeployIisAppPath="Default Web Site"
   post_build:
     commands:
